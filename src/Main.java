@@ -9,7 +9,12 @@ public class Main {
         Random random = new Random();
         Logic logic = new Logic();
 
+        // Input
         String input = scanner.nextLine();
+
+        // To count the number of simulations ran
+        int simulatorCounter = 0;
+
         System.out.println("Please press space and enter");
 
         while(input.equals(" ")){
