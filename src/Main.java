@@ -7,16 +7,17 @@ public class Main {
         // Constructors
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
+        Logic logic = new Logic();
 
         String input = scanner.nextLine();
+        System.out.println("Please press space and enter");
 
-        while(true){
-            if(!input.equals(" ")){
+        while(input.equals(" ")){
+                int generatedNumber = random.nextInt(4);
+                logic.init(generatedNumber);
+
                 System.out.println("Please press space and enter");
                 input = scanner.nextLine();
-            } else {
-                random.nextInt(4);
-            }
         }
     }
 }
