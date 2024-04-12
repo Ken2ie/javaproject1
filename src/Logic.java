@@ -22,14 +22,7 @@ public class Logic {
     public void init(int generatedNumber ){
         //getRandom Number
         processRandomNumber(generatedNumber);
-
-        testPrint(generatedNumber, " Was generated.");
     }
-
-    public void testPrint(int rand,String test){
-        System.out.println(rand + " " + test);
-    }
-
 
     public void finishedCustomer(){
         if(!barberingShopSeats.isEmpty()){
@@ -49,26 +42,33 @@ public class Logic {
 
         if(barberingShopSeats.isEmpty()){
             barberingShopSeats.add(VIPCounter + event);
-        } else if (!barberingShopSeats.contains("VIP") && OrdCounter > 0){
+        }
+        else if (barberingShopSeats.contains(event+i)){
+            var prevVIP = VIPCounter;
+            prevVIPIndex = prevVIP - 1;
+            int VIPIndex = barberingShopSeats.indexOf(event+ prevVIPIndex);
+            ++VIPIndex;
+            barberingShopSeats.add(VIPIndex, event + VIPCounter);
+        }
+        else if (!barberingShopSeats.contains(event+VIPCounter) && OrdCounter > 0){
             barberingShopSeats.add(1, event+VIPCounter);
         }
-        else if (prevVIPIndex >= 1){
-            var index = prevVIPIndex;
-            var newIndex = ++index;
-            barberingShopSeats.add(newIndex, event+ VIPCounter);
-        }
+
+        event = "++VIP" + VIPCounter;
     }
 
     public void isOrd(){
         ++OrdCounter;
         event = "Ord";
         barberingShopSeats.add(event + OrdCounter);
+        event = "++Ord" + OrdCounter;
     }
 
     public void processRandomNumber(int eventNumber){
 
         if(barberingShopSeats.size() != 6 ){
             if( eventNumber == 0){
+                if(!barberingShopSeats.isEmpty()) event = "--" + barberingShopSeats.getFirst();
                 finishedCustomer();
             } else if (eventNumber == 1){
                 isVIP();
@@ -90,34 +90,8 @@ public class Logic {
             }
         }
 
-        eventStreamer(eventNumber);
+        Logs.eventStreamer(eventNumber, barberingShopSeats, event);
     }
 
-    public void eventStreamer(int x){
-        ArrayList<String> eventStreams = new ArrayList<>();
-        StringBuilder streamer = new StringBuilder();
 
-        for(int i = 0; i < 6; i++) {
-            String curr = "";
-            if (i < barberingShopSeats.size()) { // Check if the index is within the bounds of the ArrayList
-                curr = barberingShopSeats.get(i);
-            }
-            if(curr.isEmpty()) {
-                streamer.append(": ---- ");
-            } else {
-                streamer.append(": ").append(curr).append(" ");
-            }
-        }
-
-        String stream  =  x + " ----> " + "( " + event + " ) " + "[ " + streamer.substring(1) + "]" ;
-        eventStreams.add(stream);
-        log(eventStreams);
-    }
-
-    public void log(ArrayList<String> seats){
-
-        for(String stream: seats) {
-            System.out.println(stream);
-        }
-    }
 }

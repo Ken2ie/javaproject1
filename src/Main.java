@@ -9,9 +9,8 @@ public class Main {
         Random random = new Random();
         Logic logic = new Logic();
 
-
         // To count the number of simulations ran
-        int simulatorCounter = 0;
+        int simulatorCounter = Logs.eventStreams.size();
 
         // Prompt
         System.out.println("Please press space and enter");
@@ -19,11 +18,14 @@ public class Main {
         // Input
         String input = scanner.nextLine();
 
-        while(input.equals(" ")){
+        while(input.equals(" ") && simulatorCounter != 20){
+
+            simulatorCounter = Logs.eventStreams.size();
+
                 int generatedNumber = random.nextInt(4);
                 logic.init(generatedNumber);
 
-                System.out.println("Please press space and enter");
+                System.out.println("Please press space and enter, Simulation: " + simulatorCounter);
                 input = scanner.nextLine();
         }
     }
