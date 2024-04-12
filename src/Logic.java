@@ -1,6 +1,7 @@
 import com.sun.jdi.event.ExceptionEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Logic {
@@ -21,15 +22,14 @@ public class Logic {
     public void init(int generatedNumber ){
         //getRandom Number
         processRandomNumber(generatedNumber);
+
         testPrint(generatedNumber, " Was generated.");
     }
 
     public void testPrint(int rand,String test){
         System.out.println(rand + " " + test);
     }
-    public void printTest(ArrayList<String> seats){
-        System.out.println(seats);
-    }
+
 
     public void finishedCustomer(){
         if(!barberingShopSeats.isEmpty()){
@@ -78,13 +78,46 @@ public class Logic {
         }
         else{
             if(eventNumber == 0){
+                event = "--" + barberingShopSeats.getFirst();
                 finishedCustomer();
             }
-            System.out.println("+-");
+            else if(eventNumber == 1){
+                var vipNextCount = VIPCounter + 1;
+                event = "+-VIP" + vipNextCount;
+            } else if(eventNumber >= 2){
+                var ordNextCount = OrdCounter + 1;
+                event = "+-Ord" + ordNextCount;
+            }
         }
 
-        printTest(barberingShopSeats);
+        eventStreamer(eventNumber);
     }
 
+    public void eventStreamer(int x){
+        ArrayList<String> eventStreams = new ArrayList<>();
+        StringBuilder streamer = new StringBuilder();
 
+        for(int i = 0; i < 6; i++) {
+            String curr = "";
+            if (i < barberingShopSeats.size()) { // Check if the index is within the bounds of the ArrayList
+                curr = barberingShopSeats.get(i);
+            }
+            if(curr.isEmpty()) {
+                streamer.append(": ---- ");
+            } else {
+                streamer.append(": ").append(curr).append(" ");
+            }
+        }
+
+        String stream  =  x + " ----> " + "( " + event + " ) " + "[ " + streamer.substring(1) + "]" ;
+        eventStreams.add(stream);
+        log(eventStreams);
+    }
+
+    public void log(ArrayList<String> seats){
+
+        for(String stream: seats) {
+            System.out.println(stream);
+        }
+    }
 }
