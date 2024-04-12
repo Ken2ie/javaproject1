@@ -1,5 +1,5 @@
 # Executive Barbering Shop Simulation
-![screenshot.png](/assets/screenshot.PNG)
+![screenshot.png](/assets/screenshot.png)
 
 This Java program simulates the operations of "Executive Barbering Shop" according to the provided requirements. It allows users to trigger events and observe the state of the shop.
 
