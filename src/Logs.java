@@ -4,6 +4,7 @@ import java.util.List;
 public class Logs {
 
     static ArrayList<String> eventStreams = new ArrayList<>();
+    static String stream;
 
     public Logs(){
     }
@@ -23,14 +24,14 @@ public class Logs {
             }
         }
 
-        String stream  =  x + " ----> " + "( " + event + " ) " + "[ " + streamer.substring(1) + "]" ;
+        stream  =  x + " ----> " + "( " + event + " ) " + "[ " + streamer.substring(1) + "]" ;
         eventStreams.add(stream);
         log();
     }
 
     public static void log(){
-        for(String stream: eventStreams) {
+//        for(String stream: eventStreams) {
             System.out.println(stream);
-        }
+//        }
     }
 }

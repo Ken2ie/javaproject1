@@ -13,7 +13,8 @@ public class Main {
         int simulatorCounter = Logs.eventStreams.size();
 
         // Prompt
-        System.out.println("Please press space and enter");
+        System.out.println("     x          Events             State of the Shop      ");
+        System.out.println("----------+----------------+------------------------------+");
 
         // Input
         String input = scanner.nextLine();
@@ -24,8 +25,6 @@ public class Main {
 
                 int generatedNumber = random.nextInt(4);
                 logic.init(generatedNumber);
-
-                System.out.println("Please press space and enter, Simulation: " + simulatorCounter);
                 input = scanner.nextLine();
         }
     }
